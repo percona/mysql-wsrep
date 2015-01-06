@@ -283,7 +283,7 @@ documentation and the manual for more information.
 # Sub package definition
 ##############################################################################
 
-%package -n MySQL-server%{product_suffix}
+%package -n mysql-wsrep-server%{product_suffix}
 Summary:        MySQL: a very fast and reliable SQL database server
 Group:          Applications/Databases
 Requires:       %{distro_requires} rsync lsof
@@ -299,7 +299,7 @@ Obsoletes:      MySQL-server-advanced-gpl MySQL-server-enterprise-gpl
 Provides:       mysql-server = %{version}-%{release}
 Provides:       mysql-server%{?_isa} = %{version}-%{release}
 
-%description -n MySQL-server%{product_suffix}
+%description -n mysql-wsrep-server%{product_suffix}
 The MySQL(TM) software delivers a very fast, multi-threaded, multi-user,
 and robust SQL (Structured Query Language) database server. MySQL Server
 is intended for mission-critical, heavy-load production systems as well
@@ -323,10 +323,10 @@ to run and administer a MySQL server.
 Built with wsrep patch %{wsrep_version}.
 
 If you want to access and work with the database, you have to install
-package "MySQL-client%{product_suffix}" as well!
+package "mysql-wsrep-client%{product_suffix}" as well!
 
 # ----------------------------------------------------------------------------
-%package -n MySQL-client%{product_suffix}
+%package -n mysql-wsrep-client%{product_suffix}
 Summary:        MySQL - Client
 Group:          Applications/Databases
 %if 0%{?commercial}
@@ -341,13 +341,13 @@ Obsoletes:      MySQL-client-advanced-gpl MySQL-client-enterprise-gpl
 Provides:       mysql = %{version}-%{release} 
 Provides:       mysql%{?_isa} = %{version}-%{release}
 
-%description -n MySQL-client%{product_suffix}
+%description -n mysql-wsrep-client%{product_suffix}
 This package contains the standard MySQL clients and administration tools.
 
 For a description of MySQL see the base MySQL RPM or http://www.mysql.com/
 
 # ----------------------------------------------------------------------------
-%package -n MySQL-test%{product_suffix}
+%package -n mysql-wsrep-test%{product_suffix}
 Summary:        MySQL - Test suite
 Group:          Applications/Databases
 %if 0%{?commercial}
@@ -365,13 +365,13 @@ Provides:       mysql-test = %{version}-%{release}
 Provides:       mysql-test%{?_isa} = %{version}-%{release}
 AutoReqProv:    no
 
-%description -n MySQL-test%{product_suffix}
+%description -n mysql-wsrep-test%{product_suffix}
 This package contains the MySQL regression test suite.
 
 For a description of MySQL see the base MySQL RPM or http://www.mysql.com/
 
 # ----------------------------------------------------------------------------
-%package -n MySQL-devel%{product_suffix}
+%package -n mysql-wsrep-devel%{product_suffix}
 Summary:        MySQL - Development header files and libraries
 Group:          Applications/Databases
 %if 0%{?commercial}
@@ -386,14 +386,14 @@ Obsoletes:      MySQL-devel-advanced-gpl MySQL-devel-enterprise-gpl
 Provides:       mysql-devel = %{version}-%{release}
 Provides:       mysql-devel%{?_isa} = %{version}-%{release}
 
-%description -n MySQL-devel%{product_suffix}
+%description -n mysql-wsrep-devel%{product_suffix}
 This package contains the development header files and libraries necessary
 to develop MySQL client applications.
 
 For a description of MySQL see the base MySQL RPM or http://www.mysql.com/
 
 # ----------------------------------------------------------------------------
-%package -n MySQL-shared%{product_suffix}
+%package -n mysql-wsrep-shared%{product_suffix}
 Summary:        MySQL - Shared libraries
 Group:          Applications/Databases
 %if 0%{?commercial}
@@ -407,7 +407,7 @@ Obsoletes:      MySQL-shared-pro-gpl-cert
 Obsoletes:      MySQL-shared-classic MySQL-shared-community MySQL-shared-enterprise
 Obsoletes:      MySQL-shared-advanced-gpl MySQL-shared-enterprise-gpl
 
-%description -n MySQL-shared%{product_suffix}
+%description -n mysql-wsrep-shared%{product_suffix}
 This package contains the shared libraries (*.so*) which certain languages
 and applications need to dynamically load and use MySQL.
 
@@ -588,7 +588,7 @@ install -m 644 "%{malloc_lib_source}" \
 #  Post processing actions, i.e. when installed
 ##############################################################################
 
-%pre -n MySQL-server%{product_suffix}
+%pre -n mysql-wsrep-server%{product_suffix}
 # This is the code running at the beginning of a RPM upgrade action,
 # before replacing the old files with the new ones.
 
@@ -766,7 +766,7 @@ if [ -x %{_sysconfdir}/init.d/mysql ] ; then
         sleep 5
 fi
 
-%post -n MySQL-server%{product_suffix}
+%post -n mysql-wsrep-server%{product_suffix}
 # This is the code running at the end of a RPM install or upgrade action,
 # after the (new) files have been written.
 
@@ -926,7 +926,7 @@ mv -f  $STATUS_FILE ${STATUS_FILE}-LAST  # for "triggerpostun"
 #scheduled service packs and more.  Visit www.mysql.com/enterprise for more
 #information."
 
-%preun -n MySQL-server%{product_suffix}
+%preun -n mysql-wsrep-server%{product_suffix}
 
 # Which '$1' does this refer to?  Fedora docs have info:
 # " ... a count of the number of versions of the package that are installed.
@@ -955,7 +955,7 @@ fi
 # We do not remove the mysql user since it may still own a lot of
 # database files.
 
-%triggerpostun -n MySQL-server%{product_suffix} --MySQL-server-community
+%triggerpostun -n mysql-wsrep-server%{product_suffix} --MySQL-server-community
 
 # Setup: We renamed this package, so any existing "server-community"
 #   package will be removed when this "server" is installed.
@@ -1026,7 +1026,7 @@ echo "====="                                     >> $STATUS_HISTORY
 #  Files section
 ##############################################################################
 
-%files -n MySQL-server%{product_suffix} -f release/support-files/plugins.files
+%files -n mysql-wsrep-server%{product_suffix} -f release/support-files/plugins.files
 %defattr(-,root,root,0755)
 
 %if %{defined license_files_server}
@@ -1124,7 +1124,7 @@ echo "====="                                     >> $STATUS_HISTORY
 %dir %attr(755, mysql, mysql) /var/lib/mysql
 
 # ----------------------------------------------------------------------------
-%files -n MySQL-client%{product_suffix}
+%files -n mysql-wsrep-client%{product_suffix}
 
 %defattr(-, root, root, 0755)
 %attr(755, root, root) %{_bindir}/msql2mysql
@@ -1158,7 +1158,7 @@ echo "====="                                     >> $STATUS_HISTORY
 %doc %attr(644, root, man) %{_mandir}/man1/mysql_config_editor.1*
 
 # ----------------------------------------------------------------------------
-%files -n MySQL-devel%{product_suffix} -f optional-files-devel
+%files -n mysql-wsrep-devel%{product_suffix} -f optional-files-devel
 %defattr(-, root, root, 0755)
 %doc %attr(644, root, man) %{_mandir}/man1/comp_err.1*
 %doc %attr(644, root, man) %{_mandir}/man1/mysql_config.1*
@@ -1172,19 +1172,19 @@ echo "====="                                     >> $STATUS_HISTORY
 %{_libdir}/mysql/libmysqlservices.a
 
 # ----------------------------------------------------------------------------
-%files -n MySQL-shared%{product_suffix}
+%files -n mysql-wsrep-shared%{product_suffix}
 %defattr(-, root, root, 0755)
 # Shared libraries (omit for architectures that don't support them)
 %{_libdir}/libmysql*.so*
 
-%post -n MySQL-shared%{product_suffix}
+%post -n mysql-wsrep-shared%{product_suffix}
 /sbin/ldconfig
 
-%postun -n MySQL-shared%{product_suffix}
+%postun -n mysql-wsrep-shared%{product_suffix}
 /sbin/ldconfig
 
 # ----------------------------------------------------------------------------
-%files -n MySQL-test%{product_suffix}
+%files -n mysql-wsrep-test%{product_suffix}
 %defattr(-, root, root, 0755)
 %attr(-, root, root) %{_datadir}/mysql-test
 %attr(755, root, root) %{_bindir}/mysql_client_test
