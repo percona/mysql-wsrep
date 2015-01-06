@@ -80,7 +80,7 @@
 # Source name
 # ----------------------------------------------------------------------------
 %if %{undefined src_base}
-%define src_base mysql
+%define src_base mysql-wsrep
 %endif
 %define src_dir %{src_base}-%{mysql_version}-%{wsrep_version}
 
