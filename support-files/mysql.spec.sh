@@ -119,6 +119,12 @@
 # ----------------------------------------------------------------------------
 # Distribution support
 # ----------------------------------------------------------------------------
+
+echo %{dist}
+%if %{dist} == "rhel" || %{dist} == "suse"
+%define distro_specific 1
+%endif
+
 %if %{undefined distro_specific}
 %define distro_specific 0
 %endif
