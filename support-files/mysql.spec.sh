@@ -213,13 +213,13 @@
             %if 0%{?suse_version} == 1310
               %define distro_description  openSUSE 13.1
               %define distro_releasetag   opensuse13.1
-              %define distro_buildreq     gcc-c++ gperf ncurses-devel procps pwdutils zlib-devel cmake libaio-devel
+              %define distro_buildreq     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
               %define distro_requires     aaa_base coreutils grep procps pwdutil
             %else
               %if 0%{?suse_version} == 1320
                 %define distro_description  openSUSE 13.2
                 %define distro_releasetag   opensuse13.2
-                %define distro_buildreq     gcc-c++ gperf ncurses-devel procps pwdutils zlib-devel cmake libaio-devel
+                %define distro_buildreq     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
                 %define distro_requires     aaa_base coreutils grep procps pwdutil
               %endif
             %endif
