@@ -180,7 +180,7 @@
                 %define distro_description    Red Hat Enterprise Linux 7
                 %define distro_releasetag     rhel7
                 %define distro_buildreq       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
-                %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
+                %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
               %else
                 %{error:Red Hat Enterprise Linux %{rhelver} is unsupported}
               %endif
