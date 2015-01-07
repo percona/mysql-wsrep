@@ -120,10 +120,8 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-echo %{dist}
-%if %{dist} == "rhel" || %{dist} == "suse"
+# Use distro specific by default
 %define distro_specific 1
-%endif
 
 %if %{undefined distro_specific}
 %define distro_specific 0
@@ -178,7 +176,14 @@ echo %{dist}
               %define distro_buildreq       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
               %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
             %else
-              %{error:Red Hat Enterprise Linux %{rhelver} is unsupported}
+              %if "%rhelver" == "7"
+                %define distro_description    Red Hat Enterprise Linux 7
+                %define distro_releasetag     rhel7
+                %define distro_buildreq       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+                %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
+              %else
+                %{error:Red Hat Enterprise Linux %{rhelver} is unsupported}
+              %endif
             %endif
           %endif
         %endif
