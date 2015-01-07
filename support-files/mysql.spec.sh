@@ -33,6 +33,9 @@
 %global mysqldatadir    /var/lib/mysql
 
 %global release         %{wsrep_version}
+%global short_product_tag 5.6
+
+
 
 #
 # Macros we use which are not available in all supported versions of RPM
