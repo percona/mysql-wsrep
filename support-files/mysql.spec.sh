@@ -191,7 +191,7 @@
           %endif
         %endif
       %else
-        %if %(test -f /etc/SuSE-release && echo 1 || echo 0)
+        %if %(test -f /etc/SuSE-release && echo 1 || echo 0) && 0%{suse_version} < 1220
           %define susever %(rpm -qf --qf '%%{version}\\n' /etc/SuSE-release | cut -d. -f1)
           %if "%susever" == "10"
             %define distro_description    SUSE Linux Enterprise Server 10
