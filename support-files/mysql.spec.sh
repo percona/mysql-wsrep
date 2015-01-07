@@ -213,7 +213,7 @@
             %if 0%{?suse_version} == 1310
               %define distro_description  openSUSE 13.1
               %define distro_releasetag   opensuse13.1
-              %define distro_buildreq     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
+              %define distro_buildreq     gcc-c++ gperf ncurses-devel procps pwdutils zlib-devel cmake libaio-devel
               %define distro_requires     aaa_base coreutils grep procps pwdutil
             %endif
           %else
