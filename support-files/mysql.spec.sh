@@ -83,9 +83,9 @@
 # Source name
 # ----------------------------------------------------------------------------
 %if %{undefined src_base}
-%define src_base mysql-wsrep
+%define src_base mysql
 %endif
-%define src_dir %{src_base}-%{mysql_version}-%{wsrep_version}
+%define src_dir %{src_base}-%{mysql_version}
 
 # ----------------------------------------------------------------------------
 # Feature set (storage engines, options).  Default to community (everything)
