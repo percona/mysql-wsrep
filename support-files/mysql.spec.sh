@@ -123,120 +123,55 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-# Use distro specific by default
-%define distro_specific 1
+%if 0%{rhel} == 6
+%define distro_description    Red Hat Enterprise Linux 6
+%define distro_releasetag     rhel6
+BuildRequires: gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+Requires: chkconfig coreutils grep procps shadow-utils net-tools
+%endif
 
-%if %{undefined distro_specific}
-%define distro_specific 0
+%if 0%{rhel} == 7
+%define distro_description    Red Hat Enterprise Linux 7
+%define distro_releasetag     rhel7
+BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+%define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
 %endif
-%if %{distro_specific}
-  %if %(test -f /etc/enterprise-release && echo 1 || echo 0)
-    %define oelver %(rpm -qf --qf '%%{version}\\n' /etc/enterprise-release | sed -e 's/^\\([0-9]*\\).*/\\1/g')
-    %if "%oelver" == "4"
-      %define distro_description        Oracle Enterprise Linux 4
-      %define distro_releasetag         oel4
-      BuildRequires:           gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
-      %define distro_requires           chkconfig coreutils grep procps shadow-utils net-tools
-    %else
-      %if "%oelver" == "5"
-        %define distro_description      Oracle Enterprise Linux 5
-        %define distro_releasetag       oel5
-        BuildRequires:         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
-        %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
-      %else
-        %{error:Oracle Enterprise Linux %{oelver} is unsupported}
-      %endif
-    %endif
-  %else
-    %if %(test -f /etc/oracle-release && echo 1 || echo 0)
-      %define elver %(rpm -qf --qf '%%{version}\\n' /etc/oracle-release | sed -e 's/^\\([0-9]*\\).*/\\1/g')
-      %if "%elver" == "6" || "%elver" == "7"
-        %define distro_description      Oracle Linux %elver
-        %define distro_releasetag       el%elver
-        BuildRequires:         gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
-        %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
-      %else
-        %{error:Oracle Linux %{elver} is unsupported}
-      %endif
-    %else
-      %if %(test -f /etc/redhat-release && echo 1 || echo 0)
-        %define rhelver %(rpm -qf --qf '%%{version}\\n' /etc/redhat-release | sed -e 's/^\\([0-9]*\\).*/\\1/g')
-        %if "%rhelver" == "4"
-          %define distro_description      Red Hat Enterprise Linux 4
-          %define distro_releasetag       rhel4
-          BuildRequires:         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
-          %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
-        %else
-          %if "%rhelver" == "5"
-            %define distro_description    Red Hat Enterprise Linux 5
-            %define distro_releasetag     rhel5
-            BuildRequires:       gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
-            %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
-          %else
-            %if "%rhelver" == "6"
-              %define distro_description    Red Hat Enterprise Linux 6
-              %define distro_releasetag     rhel6
-              BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
-              %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
-            %else
-              %if "%rhelver" == "7"
-                %define distro_description    Red Hat Enterprise Linux 7
-                %define distro_releasetag     rhel7
-                BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
-                %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
-              %else
-                %{error:Red Hat Enterprise Linux %{rhelver} is unsupported}
-              %endif
-            %endif
-          %endif
-        %endif
-      %else
-        %if %(test -f /etc/SuSE-release && echo 1 || echo 0) && 0%{suse_version} < 1220
-          %define susever %(rpm -qf --qf '%%{version}\\n' /etc/SuSE-release | cut -d. -f1)
-          %if "%susever" == "10"
-            %define distro_description    SUSE Linux Enterprise Server 10
-            %define distro_releasetag     sles10
-            BuildRequires:       gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client zlib-devel cmake libaio-devel
-            %define distro_requires       aaa_base coreutils grep procps pwdutils
-          %else
-            %if "%susever" == "11"
-              %define distro_description  SUSE Linux Enterprise Server 11
-              %define distro_releasetag   sles11
-              BuildRequires:     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
-              %define distro_requires     aaa_base coreutils grep procps pwdutils
-            %else
-              %{error:SuSE %{susever} is unsupported}
-            %endif
-          %endif
-        %else
-          %if 0%{?suse_version}
-            %if 0%{?suse_version} == 1310
-              %define distro_description  openSUSE 13.1
-              %define distro_releasetag   opensuse13.1
-              BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
-              %define distro_requires     aaa_base coreutils grep procps
-            %else
-              %if 0%{?suse_version} == 1320
-                %define distro_description  openSUSE 13.2
-                %define distro_releasetag   opensuse13.2
-                BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
-                %define distro_requires     aaa_base coreutils grep procps
-              %endif
-            %endif
-          %else
-            %{error:Unsupported distribution}
-          %endif
-        %endif
-      %endif
-    %endif
-  %endif
-%else
-  %define glibc_version %(/lib/libc.so.6 | grep stable | cut -d, -f1 | cut -c38-)
-  %define distro_description            Generic Linux (glibc %{glibc_version})
-  %define distro_releasetag             linux_glibc%{glibc_version}
-  BuildRequires:               gcc-c++ gperf ncurses-devel perl  time zlib-devel
-  %define distro_requires               coreutils grep procps /sbin/chkconfig /usr/sbin/useradd /usr/sbin/groupadd
+
+%if 0%{fedora} == 20
+%define distro_description    Fedora 20
+%define distro_releasetag     fc20
+BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+%define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
 %endif
+
+%if 0%{fedora} == 21
+%define distro_description    Fedora 21
+%define distro_releasetag     fc21
+BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+%define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
+%endif
+
+%if 0%{suse_version} == 1110
+%define distro_description  SUSE Linux Enterprise Server 11
+%define distro_releasetag   sles11
+BuildRequires:     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
+%define distro_requires     aaa_base coreutils grep procps pwdutils
+%endif
+
+%if 0%{?suse_version} == 1310
+%define distro_description  openSUSE 13.1
+%define distro_releasetag   opensuse13.1
+BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+%define distro_requires aaa_base coreutils grep procps
+%endif
+
+%if 0%{?suse_version} == 1320
+%define distro_description  openSUSE 13.2
+%define distro_releasetag   opensuse13.2
+BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+%define distro_requires     aaa_base coreutils grep procps
+%endif
+
 
 # Avoid debuginfo RPMs, leaves binaries unstripped
 %define debug_package   %{nil}
