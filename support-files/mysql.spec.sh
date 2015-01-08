@@ -380,7 +380,7 @@ and applications need to dynamically load and use MySQL.
 
 ##############################################################################
 %prep
-%setup -T -a 0 -c -n %{src_dir}
+%setup -a 0 -n %{src_dir}
 #wsrep_apply_patch_tag
 ##############################################################################
 %build
