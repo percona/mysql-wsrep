@@ -135,13 +135,13 @@
     %if "%oelver" == "4"
       %define distro_description        Oracle Enterprise Linux 4
       %define distro_releasetag         oel4
-      %define distro_buildreq           gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
+      BuildRequires:           gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
       %define distro_requires           chkconfig coreutils grep procps shadow-utils net-tools
     %else
       %if "%oelver" == "5"
         %define distro_description      Oracle Enterprise Linux 5
         %define distro_releasetag       oel5
-        %define distro_buildreq         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
+        BuildRequires:         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
         %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
       %else
         %{error:Oracle Enterprise Linux %{oelver} is unsupported}
@@ -153,7 +153,7 @@
       %if "%elver" == "6" || "%elver" == "7"
         %define distro_description      Oracle Linux %elver
         %define distro_releasetag       el%elver
-        %define distro_buildreq         gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+        BuildRequires:         gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
         %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
       %else
         %{error:Oracle Linux %{elver} is unsupported}
@@ -164,25 +164,25 @@
         %if "%rhelver" == "4"
           %define distro_description      Red Hat Enterprise Linux 4
           %define distro_releasetag       rhel4
-          %define distro_buildreq         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
+          BuildRequires:         gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
           %define distro_requires         chkconfig coreutils grep procps shadow-utils net-tools
         %else
           %if "%rhelver" == "5"
             %define distro_description    Red Hat Enterprise Linux 5
             %define distro_releasetag     rhel5
-            %define distro_buildreq       gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
+            BuildRequires:       gcc-c++ gperf ncurses-devel perl time zlib-devel cmake libaio-devel
             %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
           %else
             %if "%rhelver" == "6"
               %define distro_description    Red Hat Enterprise Linux 6
               %define distro_releasetag     rhel6
-              %define distro_buildreq       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+              BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
               %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools
             %else
               %if "%rhelver" == "7"
                 %define distro_description    Red Hat Enterprise Linux 7
                 %define distro_releasetag     rhel7
-                %define distro_buildreq       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+                BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
                 %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
               %else
                 %{error:Red Hat Enterprise Linux %{rhelver} is unsupported}
@@ -196,13 +196,13 @@
           %if "%susever" == "10"
             %define distro_description    SUSE Linux Enterprise Server 10
             %define distro_releasetag     sles10
-            %define distro_buildreq       gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client zlib-devel cmake libaio-devel
+            BuildRequires:       gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client zlib-devel cmake libaio-devel
             %define distro_requires       aaa_base coreutils grep procps pwdutils
           %else
             %if "%susever" == "11"
               %define distro_description  SUSE Linux Enterprise Server 11
               %define distro_releasetag   sles11
-              %define distro_buildreq     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
+              BuildRequires:     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
               %define distro_requires     aaa_base coreutils grep procps pwdutils
             %else
               %{error:SuSE %{susever} is unsupported}
@@ -213,13 +213,13 @@
             %if 0%{?suse_version} == 1310
               %define distro_description  openSUSE 13.1
               %define distro_releasetag   opensuse13.1
-              %define distro_buildreq     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+              BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
               %define distro_requires     aaa_base coreutils grep procps
             %else
               %if 0%{?suse_version} == 1320
                 %define distro_description  openSUSE 13.2
                 %define distro_releasetag   opensuse13.2
-                %define distro_buildreq     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+                BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
                 %define distro_requires     aaa_base coreutils grep procps
               %endif
             %endif
@@ -234,7 +234,7 @@
   %define glibc_version %(/lib/libc.so.6 | grep stable | cut -d, -f1 | cut -c38-)
   %define distro_description            Generic Linux (glibc %{glibc_version})
   %define distro_releasetag             linux_glibc%{glibc_version}
-  %define distro_buildreq               gcc-c++ gperf ncurses-devel perl  time zlib-devel
+  BuildRequires:               gcc-c++ gperf ncurses-devel perl  time zlib-devel
   %define distro_requires               coreutils grep procps /sbin/chkconfig /usr/sbin/useradd /usr/sbin/groupadd
 %endif
 
@@ -281,7 +281,7 @@ Source:         http://www.mysql.com/Downloads/MySQL-@MYSQL_BASE_VERSION@/%{src_
 URL:            http://www.mysql.com/
 Packager:       MySQL Release Engineering <mysql-build@oss.oracle.com> 
 Vendor:         %{mysql_vendor}
-BuildRequires:  %{distro_buildreq}
+# BuildRequires:  %{distro_buildreq}
 #wsrep_patch_tag
 
 # Regression tests may take a long time, override the default to skip them 
