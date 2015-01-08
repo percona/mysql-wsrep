@@ -26,7 +26,7 @@
 
 %global mysql_version   @VERSION@
 %global wsrep_version   @WSREP_VERSION@
-%global wsrep_revision  @WSREP_PATCH_REVNO@
+%global wsrep_revision  @WSREP_REVISION@
 
 %global mysqld_user     mysql
 %global mysqld_group    mysql
