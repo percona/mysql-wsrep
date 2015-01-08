@@ -123,51 +123,44 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-%if 0%{rhel} == 6
+%if 0%{?rhel} == 6
 %define distro_description    Red Hat Enterprise Linux 6
-%define distro_releasetag     rhel6
 BuildRequires: gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
 Requires: chkconfig coreutils grep procps shadow-utils net-tools
 %endif
 
-%if 0%{rhel} == 7
+%if 0%{?rhel} == 7
 %define distro_description    Red Hat Enterprise Linux 7
-%define distro_releasetag     rhel7
 BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
 %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
 %endif
 
-%if 0%{fedora} == 20
+%if 0%{?fedora} == 20
 %define distro_description    Fedora 20
-%define distro_releasetag     fc20
 BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
 %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
 %endif
 
-%if 0%{fedora} == 21
+%if 0%{?fedora} == 21
 %define distro_description    Fedora 21
-%define distro_releasetag     fc21
 BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
 %define distro_requires       chkconfig coreutils grep procps shadow-utils net-tools perl-Data-Dumper
 %endif
 
-%if 0%{suse_version} == 1110
+%if 0%{?suse_version} == 1110
 %define distro_description  SUSE Linux Enterprise Server 11
-%define distro_releasetag   sles11
 BuildRequires:     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
 %define distro_requires     aaa_base coreutils grep procps pwdutils
 %endif
 
 %if 0%{?suse_version} == 1310
 %define distro_description  openSUSE 13.1
-%define distro_releasetag   opensuse13.1
 BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
 %define distro_requires aaa_base coreutils grep procps
 %endif
 
 %if 0%{?suse_version} == 1320
 %define distro_description  openSUSE 13.2
-%define distro_releasetag   opensuse13.2
 BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
 %define distro_requires     aaa_base coreutils grep procps
 %endif
@@ -209,7 +202,7 @@ Name:           MySQL%{product_suffix}
 Summary:        MySQL: a very fast and reliable SQL database server
 Group:          Applications/Databases
 Version:        @MYSQL_RPM_VERSION@
-Release:        %{release}%{?distro_releasetag:.%{distro_releasetag}}
+Release:        %{release}%{dist}
 Distribution:   %{distro_description}
 License:        Copyright (c) 2000, @MYSQL_COPYRIGHT_YEAR@, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
 Source:         http://www.mysql.com/Downloads/MySQL-@MYSQL_BASE_VERSION@/%{src_dir}.tar.gz
