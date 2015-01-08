@@ -282,6 +282,7 @@ URL:            http://www.mysql.com/
 Packager:       MySQL Release Engineering <mysql-build@oss.oracle.com> 
 Vendor:         %{mysql_vendor}
 BuildRequires:  %{distro_buildreq}
+#wsrep_patch_tag
 
 # Regression tests may take a long time, override the default to skip them 
 %{!?runselftest:%global runselftest 0}
@@ -444,6 +445,7 @@ and applications need to dynamically load and use MySQL.
 ##############################################################################
 %prep
 %setup -T -a 0 -c -n %{src_dir}
+#wsrep_apply_patch_tag
 ##############################################################################
 %build
 
