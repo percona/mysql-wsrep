@@ -123,39 +123,37 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-%if 0%{?rhel} == 6
-%define distro_description    Red Hat Enterprise Linux 6
 BuildRequires: gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+
+%if 0%{?rhel} == 6
+# %define distro_description    Red Hat Enterprise Linux 6
 %endif
 
 %if 0%{?rhel} == 7
-%define distro_description    Red Hat Enterprise Linux 7
-BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+# %define distro_description    Red Hat Enterprise Linux 7
 %endif
 
 %if 0%{?fedora} == 20
-%define distro_description    Fedora 20
-BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+# %define distro_description    Fedora 20
 %endif
 
 %if 0%{?fedora} == 21
-%define distro_description    Fedora 21
-BuildRequires:       gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+# %define distro_description    Fedora 21
 %endif
 
 %if 0%{?suse_version} == 1110
-%define distro_description  SUSE Linux Enterprise Server 11
-BuildRequires:     gcc-c++ gdbm-devel gperf ncurses-devel openldap2-client procps pwdutils zlib-devel cmake libaio-devel
+# %define distro_description    SUSE Linux Enterprise Server 11
+BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
 %endif
 
 %if 0%{?suse_version} == 1310
-%define distro_description  openSUSE 13.1
-BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+# %define distro_description    openSUSE 13.1
+BuildRequires: gperf procps
 %endif
 
 %if 0%{?suse_version} == 1320
-%define distro_description  openSUSE 13.2
-BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-devel
+# %define distro_description    openSUSE 13.2
+BuildRequires: gperf procps
 %endif
 
 
@@ -196,7 +194,7 @@ Summary:        MySQL: a very fast and reliable SQL database server
 Group:          Applications/Databases
 Version:        @MYSQL_RPM_VERSION@
 Release:        %{release}%{dist}
-Distribution:   %{distro_description}
+# Distribution:   %{distro_description}
 License:        Copyright (c) 2000, @MYSQL_COPYRIGHT_YEAR@, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
 Source:         http://www.mysql.com/Downloads/MySQL-@MYSQL_BASE_VERSION@/%{src_dir}.tar.gz
 URL:            http://www.mysql.com/
