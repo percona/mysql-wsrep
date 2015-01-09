@@ -123,39 +123,19 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-BuildRequires: gcc-c++ ncurses-devel perl time zlib-devel cmake libaio-devel
+BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel
 
-%if 0%{?rhel} == 6
-# %define distro_description    Red Hat Enterprise Linux 6
-%endif
-
-%if 0%{?rhel} == 7
-# %define distro_description    Red Hat Enterprise Linux 7
-%endif
-
-%if 0%{?fedora} == 20
-# %define distro_description    Fedora 20
-%endif
-
-%if 0%{?fedora} == 21
-# %define distro_description    Fedora 21
+%if 0%{?rhel} == 6 || 0%{?rhel} == 7 || 0%{?fedora} == 20 || 0%{?fedora} == 21
+BuildRequires: time
 %endif
 
 %if 0%{?suse_version} == 1110
-# %define distro_description    SUSE Linux Enterprise Server 11
 BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
 %endif
 
-%if 0%{?suse_version} == 1310
-# %define distro_description    openSUSE 13.1
-BuildRequires: gperf procps
+%if 0%{?suse_version} == 1310 || 0%{?suse_version} == 1320
+BuildRequires: gperf procps time
 %endif
-
-%if 0%{?suse_version} == 1320
-# %define distro_description    openSUSE 13.2
-BuildRequires: gperf procps
-%endif
-
 
 # Avoid debuginfo RPMs, leaves binaries unstripped
 %define debug_package   %{nil}
@@ -1080,6 +1060,8 @@ echo "====="                                     >> $STATUS_HISTORY
 %attr(755, root, root) %{_sbindir}/mysqld
 %attr(755, root, root) %{_sbindir}/mysqld-debug
 %attr(755, root, root) %{_sbindir}/rcmysql
+%dir %{_libdir}/mysql/plugin
+%dir %{_libdir}/mysql/plugin/debug
 %attr(755, root, root) %{_libdir}/mysql/plugin/daemon_example.ini
 
 %if %{WITH_TCMALLOC}
