@@ -124,7 +124,7 @@
 # ----------------------------------------------------------------------------
 
 # Disable post build checks for time being.
-BuildRequires: -post-build-checks
+BuildConflicts: post-build-checks
 
 BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel bison flex
 
