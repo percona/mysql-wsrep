@@ -183,7 +183,7 @@ BuildRequires:     gcc-c++ gperf ncurses-devel procps zlib-devel cmake libaio-de
 %define license_files_server    %{src_dir}/LICENSE.mysql
 %define license_type            Commercial
 %else
-%define license_files_server    %{src_dir}/COPYING %{src_dir}/README
+%define license_files_server    COPYING README
 %define license_type            GPL
 %endif
 
@@ -380,7 +380,7 @@ and applications need to dynamically load and use MySQL.
 
 ##############################################################################
 %prep
-%setup -a 0 -n %{src_dir}
+%setup -n %{src_dir}
 #wsrep_apply_patch_tag
 ##############################################################################
 %build
@@ -451,7 +451,7 @@ mkdir debug
                   -e 's/ $//'`
   # XXX: MYSQL_UNIX_ADDR should be in cmake/* but mysql_version is included before
   # XXX: install_layout so we can't just set it based on INSTALL_LAYOUT=RPM
-  ${CMAKE} ../%{src_dir} -DBUILD_CONFIG=mysql_release -DINSTALL_LAYOUT=RPM \
+  ${CMAKE} ../ -DBUILD_CONFIG=mysql_release -DINSTALL_LAYOUT=RPM \
            -DCMAKE_BUILD_TYPE=Debug \
            -DMYSQL_UNIX_ADDR="%{mysqldatadir}/mysql.sock" \
            -DFEATURE_SET="%{feature_set}" \
@@ -470,7 +470,7 @@ mkdir release
   cd release
   # XXX: MYSQL_UNIX_ADDR should be in cmake/* but mysql_version is included before
   # XXX: install_layout so we can't just set it based on INSTALL_LAYOUT=RPM
-  ${CMAKE} ../%{src_dir} -DBUILD_CONFIG=mysql_release -DINSTALL_LAYOUT=RPM \
+  ${CMAKE} ../ -DBUILD_CONFIG=mysql_release -DINSTALL_LAYOUT=RPM \
            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
            -DMYSQL_UNIX_ADDR="%{mysqldatadir}/mysql.sock" \
            -DFEATURE_SET="%{feature_set}" \
@@ -526,7 +526,7 @@ install -m 755 $MBD/release/support-files/mysql.server $RBR%{_sysconfdir}/init.d
 
 # Create a symlink "rcmysql", pointing to the init.script. SuSE users
 # will appreciate that, as all services usually offer this.
-ln -s %{_sysconfdir}/init.d/mysql $RBR%{_sbindir}/rcmysql
+ln -sf %{_sysconfdir}/init.d/mysql $RBR%{_sbindir}/rcmysql
 
 # Create a wsrep_sst_rsync_wan symlink.
 install -d $RBR%{_bindir}
@@ -539,7 +539,7 @@ touch $RBR%{_sysconfdir}/wsrep.cnf
 
 
 # Install SELinux files in datadir
-install -m 600 $MBD/%{src_dir}/support-files/RHEL4-SElinux/mysql.{fc,te} \
+install -m 600 $MBD/support-files/RHEL4-SElinux/mysql.{fc,te} \
   $RBR%{_datadir}/mysql/SELinux/RHEL4
 
 %if %{WITH_TCMALLOC}
@@ -1002,11 +1002,11 @@ echo "====="                                     >> $STATUS_HISTORY
 %if %{defined license_files_server}
 %doc %{license_files_server}
 %endif
-%doc %{src_dir}/Docs/ChangeLog
-%doc %{src_dir}/Docs/INFO_SRC*
+%doc Docs/ChangeLog
+%doc Docs/INFO_SRC*
 %doc release/Docs/INFO_BIN*
 %doc release/support-files/my-default.cnf
-%doc %{src_dir}/Docs/README-wsrep
+%doc Docs/README-wsrep
 %doc release/support-files/wsrep.cnf
 %doc release/support-files/wsrep_notify
 
