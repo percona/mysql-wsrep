@@ -123,7 +123,10 @@
 # Distribution support
 # ----------------------------------------------------------------------------
 
-BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel
+# Disable post build checks for time being.
+BuildRequires: -post-build-checks
+
+BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel bison flex
 
 %if 0%{?rhel} == 6 || 0%{?rhel} == 7 || 0%{?fedora} == 20 || 0%{?fedora} == 21
 BuildRequires: time
