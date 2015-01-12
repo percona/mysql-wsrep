@@ -124,7 +124,7 @@
 # ----------------------------------------------------------------------------
 
 # Disable post build checks for time being.
-BuildConflicts: post-build-checks
+BuildConflicts: post-build-checks rpmlint
 
 BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel bison flex
 
@@ -132,13 +132,16 @@ BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel bison fl
 BuildRequires: time
 %endif
 
-%if 0%{?suse_version} == 1110
+%if 0%{?suse_version} < 1310
 BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
+%global dist sles
 %endif
 
 %if 0%{?suse_version} == 1310 || 0%{?suse_version} == 1320
 BuildRequires: gperf procps time
+%global dist opensuse
 %endif
+
 
 # Avoid debuginfo RPMs, leaves binaries unstripped
 %define debug_package   %{nil}
@@ -229,7 +232,7 @@ Requires: perl-Data-Dumper
 %endif
 # SUSE
 %if 0%{?suse_version}
-Requires: aaa_base coreutils grep procps
+Requires: aaa_base coreutils grep procps rsync lsof
 %if 0%{suse_version} == 1110
 Requires: pwdutils
 %endif
