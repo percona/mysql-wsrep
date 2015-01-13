@@ -142,6 +142,8 @@ BuildRequires: gperf procps time
 %global dist opensuse
 %endif
 
+%dump
+exit 1
 
 # Avoid debuginfo RPMs, leaves binaries unstripped
 %define debug_package   %{nil}
