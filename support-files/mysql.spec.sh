@@ -132,7 +132,9 @@ BuildRequires: gcc-c++ ncurses-devel perl zlib-devel cmake libaio-devel bison fl
 BuildRequires: time
 %endif
 
-%if 0%{?suse_version} < 1310
+%if 0%{?suse_version}
+%global dist suse
+%if 0%{?suse_version} == 1110
 BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
 %global dist sles
 %endif
@@ -140,6 +142,7 @@ BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
 %if 0%{?suse_version} == 1310 || 0%{?suse_version} == 1320
 BuildRequires: gperf procps time
 %global dist opensuse
+%endif
 %endif
 
 %dump
