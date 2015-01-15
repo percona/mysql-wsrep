@@ -83,9 +83,9 @@
 # Source name
 # ----------------------------------------------------------------------------
 %if %{undefined src_base}
-%define src_base mysql
+%define src_base mysql-wsrep-%{short_product_tag}
 %endif
-%define src_dir %{src_base}-%{mysql_version}
+%define src_dir %{src_base}-%{mysql_version}-%{wsrep_version}
 
 # ----------------------------------------------------------------------------
 # Feature set (storage engines, options).  Default to community (everything)
@@ -185,7 +185,7 @@ Version:        @MYSQL_RPM_VERSION@
 Release:        %{release}%{dist}
 # Distribution:   %{distro_description}
 License:        Copyright (c) 2000, @MYSQL_COPYRIGHT_YEAR@, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
-Source:         http://www.mysql.com/Downloads/MySQL-@MYSQL_BASE_VERSION@/%{src_dir}.tar.gz
+Source:         %{src_dir}.tar.gz
 URL:            http://www.mysql.com/
 Packager:       MySQL Release Engineering <mysql-build@oss.oracle.com> 
 Vendor:         %{mysql_vendor}
