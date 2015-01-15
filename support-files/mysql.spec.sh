@@ -990,7 +990,6 @@ echo "====="                                     >> $STATUS_HISTORY
 %doc %{license_files_server}
 %endif
 %doc Docs/ChangeLog
-%doc Docs/INFO_SRC*
 %doc release/Docs/INFO_BIN*
 %doc release/support-files/my-default.cnf
 %doc Docs/README-wsrep
