@@ -187,7 +187,7 @@ Release:        %{release}%{dist}
 License:        Copyright (c) 2000, @MYSQL_COPYRIGHT_YEAR@, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
 Source:         %{src_dir}.tar.gz
 URL:            http://www.mysql.com/
-Packager:       MySQL Release Engineering <mysql-build@oss.oracle.com> 
+Packager:       Codership Oy <info@galeracluster.com>
 Vendor:         %{mysql_vendor}
 # BuildRequires:  %{distro_buildreq}
 #wsrep_patch_tag
@@ -990,6 +990,7 @@ echo "====="                                     >> $STATUS_HISTORY
 %doc %{license_files_server}
 %endif
 %doc Docs/ChangeLog
+%doc release/Docs/INFO_SRC*
 %doc release/Docs/INFO_BIN*
 %doc release/support-files/my-default.cnf
 %doc Docs/README-wsrep
