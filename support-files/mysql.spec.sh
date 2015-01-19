@@ -133,16 +133,26 @@ BuildRequires: time
 %endif
 
 %if 0%{?suse_version}
-%global dist suse
 %if 0%{?suse_version} == 1110
 BuildRequires: gdbm-devel gperf openldap2-client procps pwdutils
-%global dist sles
+%endif
+%if 0%{?suse_version} == 1310 || 0%{?suse_version} == 1315 || 0%{?suse_version} == 1320
+BuildRequires: gperf procps time
+%endif
 %endif
 
-%if 0%{?suse_version} == 1310 || 0%{?suse_version} == 1320
-BuildRequires: gperf procps time
-%global dist opensuse
+# Define dist tag if not given by platform
+
+# For suse versions see:
+# https://en.opensuse.org/openSUSE:Build_Service_cross_distribution_howto
+%if 0%{?suse_version} == 1310
+%define dist suse13.1
 %endif
+%if 0%{?suse_version} == 1315
+%define dist sle12
+%endif
+%if 0%{?suse_version} == 1320
+%define dist suse13.2
 %endif
 
 
